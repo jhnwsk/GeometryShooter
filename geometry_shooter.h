@@ -2,6 +2,8 @@
 #define SHOOTER_H
 
 #include "custom_widget.h"
+#include "moving_target.h"
+#include <list>
 #include <QFile>
 
 // Maximum data buffers we will need.
@@ -18,9 +20,10 @@
 #define VELOCITY_OFFSET    3
 #define POSITION_OFFSET    3
 
+using namespace std;
+
 class GeometryShooter : public CustomWidget
 {
-
 public:
         GeometryShooter(int argc, char **argv, int timerInterval);
         GeometryShooter( QWidget *parent=0, char *name=0 );
@@ -36,6 +39,9 @@ private:
 
         // Velocity of the source sounds.
         static ALfloat SourcesVel[NUM_SOURCES][3];
+
+        // the list of moving targets
+        std::list<MovingTarget*> movingTargets;
 
         // Buffers hold sound data.
         ALuint Buffers[NUM_BUFFERS];

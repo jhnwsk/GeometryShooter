@@ -10,6 +10,11 @@
 
 class QTimer;
 
+/*
+ * The custom widget class. All init procedures, general slots and signals
+ * and non gameplay functionality goes here.
+ */
+
 class CustomWidget : public QGLWidget
 {
         Q_OBJECT
@@ -18,6 +23,7 @@ public:
         CustomWidget( int timerInterval=0, QWidget *parent=0 );
 
 protected:
+
         virtual void initializeGL();
         virtual void resizeGL( int width, int height );
         virtual void initializeAL(int argc, char **argv);

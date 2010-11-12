@@ -1,47 +1,25 @@
 #include "geometry_shooter.h"
 
-#include <QApplication>
+#include <algorithm>
 #include <QKeyEvent>
 
 GLint GeometryShooter::play[NUM_SOURCES] = {true, false, false};
 
 //GLfloat GeometryShooter::trianglePosition [] = {-1.5f,0.0f,-6.0f};
-GLfloat GeometryShooter::SourcesPos [NUM_SOURCES][3] = {{33.0f,-13.0f,-38.0f},{3.0f,-1.0f,-7.0f},{-12.0f,7.0f,-45.0f}};
+GLfloat GeometryShooter::SourcesPos [NUM_SOURCES][3] = {{.0f,.0f,.0f},{3.0f,-1.0f,-7.0f},{-12.0f,7.0f,-45.0f}};
 GLfloat GeometryShooter::SourcesVel [NUM_SOURCES][3] = {{.0f,.0f,.0f},{.0f,.0f,.0f},{.0f,.0f,.0f}};
 
 void GeometryShooter::keyPressEvent(QKeyEvent *e)
 {
     switch( e->key() )
     {
-    case Qt::Key_H: alSourcePlay (helloSource); // alutSleep (1);
-        break;
-
-    //case Qt::Key_P: alSourcePlay(Sources[TRIANGLE]); break;
-    //case Qt::Key_S: alSourceStop(sourceTriangle); break;
-    //case Qt::Key_T: alSourcePause(sourceTriangle); break;
     case Qt::Key_Left:
-
-        //SourcePos[0] += 5;
-        //SourcePos[1] += 5;
-        //SourcePos[2] += 5;
-
-        //check = SourceVel[0];
-
-        //SourceVel[0] += 10;
-        //SourceVel[1] += 10;
-        //SourceVel[2] += 10;
-
-        //check = SourceVel[0];
-
-        //alSourcefv(sourceTriangle, AL_POSITION, SourcePos);
-        //alSourcefv(sourceTriangle, AL_VELOCITY, SourceVel);
         break;
 
-    case Qt::Key_1: play[TRIANGLE] = !play[TRIANGLE]; break;
+    case Qt::Key_1: movingTargets.push_back(new Triangle(TRIANGLE)); break;// play[TRIANGLE] = !play[TRIANGLE]; break;
     case Qt::Key_2: play[SQUARE] = !play[SQUARE]; break;
     case Qt::Key_M: play[BACKGROUND] = !play[BACKGROUND]; break;
-    case
-            Qt::Key_Escape:
+    case Qt::Key_Escape:
         KillALData();
         close();
     }
@@ -49,7 +27,10 @@ void GeometryShooter::keyPressEvent(QKeyEvent *e)
 
 GeometryShooter::GeometryShooter(int argc, char **argv, int timerInterval) : CustomWidget( timerInterval )
 {
+    // initialize AL
     initializeAL(argc, argv);
+
+    // initialize rotate factors
     rtri = rquad = 0.0f;
 
     // Load the wav data.
@@ -58,6 +39,7 @@ GeometryShooter::GeometryShooter(int argc, char **argv, int timerInterval) : Cus
     SetListenerValues();
 }
 
+// not using this one
 GeometryShooter::GeometryShooter( QWidget *parent, char *name) : CustomWidget( 0, parent )
 {
 }
@@ -66,40 +48,9 @@ void GeometryShooter::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    if(play[TRIANGLE])
-    {
-        glLoadIdentity();
+    for_each(movingTargets.begin(), movingTargets.end(), MovingTarget::staticPaintGL);
+    // foreach(MovingTarget * target, movingTargets) target->paintGL();
 
-        glTranslatef(SourcesPos[TRIANGLE][0], SourcesPos[TRIANGLE][1], SourcesPos[TRIANGLE][2]);
-        glRotatef(rtri,0.0f,1.0f,0.0f);
-
-        glBegin(GL_TRIANGLES);
-        glColor3f(1.0f,0.0f,0.0f);
-        glVertex3f( 0.0f, 1.0f, 0.0f);
-        glColor3f(0.0f,1.0f,0.0f);
-        glVertex3f(-1.0f,-1.0f, 1.0f);
-        glColor3f(0.0f,0.0f,1.0f);
-        glVertex3f( 1.0f,-1.0f, 1.0f);
-        glColor3f(1.0f,0.0f,0.0f);
-        glVertex3f( 0.0f, 1.0f, 0.0f);
-        glColor3f(0.0f,0.0f,1.0f);
-        glVertex3f( 1.0f,-1.0f, 1.0f);
-        glColor3f(0.0f,1.0f,0.0f);
-        glVertex3f( 1.0f,-1.0f, -1.0f);
-        glColor3f(1.0f,0.0f,0.0f);
-        glVertex3f( 0.0f, 1.0f, 0.0f);
-        glColor3f(0.0f,1.0f,0.0f);
-        glVertex3f( 1.0f,-1.0f, -1.0f);
-        glColor3f(0.0f,0.0f,1.0f);
-        glVertex3f(-1.0f,-1.0f, -1.0f);
-        glColor3f(1.0f,0.0f,0.0f);
-        glVertex3f( 0.0f, 1.0f, 0.0f);
-        glColor3f(0.0f,0.0f,1.0f);
-        glVertex3f(-1.0f,-1.0f,-1.0f);
-        glColor3f(0.0f,1.0f,0.0f);
-        glVertex3f(-1.0f,-1.0f, 1.0f);
-        glEnd();
-    }
     if(play[SQUARE])
     {
         glLoadIdentity();
@@ -203,7 +154,7 @@ ALboolean GeometryShooter::LoadALData(){
     if (alGetError() != AL_NO_ERROR)
         return AL_FALSE;
 
-    Buffers[BACKGROUND] = alutCreateBufferFromFile("strings.wav");
+    Buffers[BACKGROUND] = alutCreateBufferFromFile("stringsmono.wav");
     Buffers[TRIANGLE] = alutCreateBufferWaveform(ALUT_WAVEFORM_SINE, 440, 0, 10);
     Buffers[SQUARE] = alutCreateBufferWaveform(ALUT_WAVEFORM_SQUARE, 330, 0, 10);
 

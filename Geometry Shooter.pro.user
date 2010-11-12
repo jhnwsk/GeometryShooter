@@ -67,17 +67,16 @@
   <valuemap type="QVariantMap">
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Debug</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList">
-    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-2Yyw1sg416,guid=1c5fc3931ea7de6089d497b24cb97674</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-dveiYEaprO,guid=5c4576cc68a1a2fb312974394cdbe601</value>
     <value type="QString">DEFAULTS_PATH=/usr/share/gconf/gnome.default.path</value>
-    <value type="QString">DESKTOP_AUTOSTART_ID=10b0e91684673e9a4f128722290035234900000020770000</value>
     <value type="QString">DESKTOP_SESSION=gnome</value>
     <value type="QString">DISPLAY=:0.0</value>
     <value type="QString">GDMSESSION=gnome</value>
     <value type="QString">GDM_KEYBOARD_LAYOUT=pl</value>
     <value type="QString">GDM_LANG=en_US.utf8</value>
     <value type="QString">GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
-    <value type="QString">GNOME_KEYRING_CONTROL=/tmp/keyring-fUPNsk</value>
-    <value type="QString">GNOME_KEYRING_PID=2056</value>
+    <value type="QString">GNOME_KEYRING_CONTROL=/tmp/keyring-2mRIMY</value>
+    <value type="QString">GNOME_KEYRING_PID=2012</value>
     <value type="QString">GTK_MODULES=canberra-gtk-module</value>
     <value type="QString">HOME=/home/john</value>
     <value type="QString">LANG=en_US.utf8</value>
@@ -88,17 +87,17 @@
     <value type="QString">PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
     <value type="QString">PWD=/home/john</value>
     <value type="QString">QTDIR=/usr/share/qt4</value>
-    <value type="QString">SESSION_MANAGER=local/FireInTheDisco:@/tmp/.ICE-unix/2077,unix/FireInTheDisco:/tmp/.ICE-unix/2077</value>
+    <value type="QString">SESSION_MANAGER=local/FireInTheDisco:@/tmp/.ICE-unix/2030,unix/FireInTheDisco:/tmp/.ICE-unix/2030</value>
     <value type="QString">SHELL=/bin/bash</value>
     <value type="QString">SPEECHD_PORT=7560</value>
-    <value type="QString">SSH_AGENT_PID=2111</value>
-    <value type="QString">SSH_AUTH_SOCK=/tmp/keyring-fUPNsk/ssh</value>
+    <value type="QString">SSH_AGENT_PID=2064</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/keyring-2mRIMY/ssh</value>
     <value type="QString">USER=john</value>
     <value type="QString">USERNAME=john</value>
-    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-john-CAbJBj/database</value>
+    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-john-llOZKI/database</value>
     <value type="QString">XDG_CONFIG_DIRS=/etc/xdg/xdg-gnome:/etc/xdg</value>
     <value type="QString">XDG_DATA_DIRS=/usr/share/gnome:/usr/local/share/:/usr/share/</value>
-    <value type="QString">XDG_SESSION_COOKIE=7870cdb1e08c68e923eccdd44af09522-1287222899.804810-547356182</value>
+    <value type="QString">XDG_SESSION_COOKIE=7870cdb1e08c68e923eccdd44af09522-1289479680.816857-992095096</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList">
     <value type="QString">/home/john/Development/FTiMS/GeometryShooter/Geometry Shooter.pro</value>
@@ -117,17 +116,16 @@
   <valuemap type="QVariantMap">
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Debug</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList">
-    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-2Yyw1sg416,guid=1c5fc3931ea7de6089d497b24cb97674</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-dveiYEaprO,guid=5c4576cc68a1a2fb312974394cdbe601</value>
     <value type="QString">DEFAULTS_PATH=/usr/share/gconf/gnome.default.path</value>
-    <value type="QString">DESKTOP_AUTOSTART_ID=10b0e91684673e9a4f128722290035234900000020770000</value>
     <value type="QString">DESKTOP_SESSION=gnome</value>
     <value type="QString">DISPLAY=:0.0</value>
     <value type="QString">GDMSESSION=gnome</value>
     <value type="QString">GDM_KEYBOARD_LAYOUT=pl</value>
     <value type="QString">GDM_LANG=en_US.utf8</value>
     <value type="QString">GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
-    <value type="QString">GNOME_KEYRING_CONTROL=/tmp/keyring-fUPNsk</value>
-    <value type="QString">GNOME_KEYRING_PID=2056</value>
+    <value type="QString">GNOME_KEYRING_CONTROL=/tmp/keyring-2mRIMY</value>
+    <value type="QString">GNOME_KEYRING_PID=2012</value>
     <value type="QString">GTK_MODULES=canberra-gtk-module</value>
     <value type="QString">HOME=/home/john</value>
     <value type="QString">LANG=en_US.utf8</value>
@@ -138,17 +136,17 @@
     <value type="QString">PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
     <value type="QString">PWD=/home/john</value>
     <value type="QString">QTDIR=/usr/share/qt4</value>
-    <value type="QString">SESSION_MANAGER=local/FireInTheDisco:@/tmp/.ICE-unix/2077,unix/FireInTheDisco:/tmp/.ICE-unix/2077</value>
+    <value type="QString">SESSION_MANAGER=local/FireInTheDisco:@/tmp/.ICE-unix/2030,unix/FireInTheDisco:/tmp/.ICE-unix/2030</value>
     <value type="QString">SHELL=/bin/bash</value>
     <value type="QString">SPEECHD_PORT=7560</value>
-    <value type="QString">SSH_AGENT_PID=2111</value>
-    <value type="QString">SSH_AUTH_SOCK=/tmp/keyring-fUPNsk/ssh</value>
+    <value type="QString">SSH_AGENT_PID=2064</value>
+    <value type="QString">SSH_AUTH_SOCK=/tmp/keyring-2mRIMY/ssh</value>
     <value type="QString">USER=john</value>
     <value type="QString">USERNAME=john</value>
-    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-john-CAbJBj/database</value>
+    <value type="QString">XAUTHORITY=/var/run/gdm/auth-for-john-llOZKI/database</value>
     <value type="QString">XDG_CONFIG_DIRS=/etc/xdg/xdg-gnome:/etc/xdg</value>
     <value type="QString">XDG_DATA_DIRS=/usr/share/gnome:/usr/local/share/:/usr/share/</value>
-    <value type="QString">XDG_SESSION_COOKIE=7870cdb1e08c68e923eccdd44af09522-1287222899.804810-547356182</value>
+    <value type="QString">XDG_SESSION_COOKIE=7870cdb1e08c68e923eccdd44af09522-1289479680.816857-992095096</value>
    </valuelist>
    <value key="abstractProcess.IgnoreReturnValue" type="bool">false</value>
    <valuelist key="abstractProcess.arguments" type="QVariantList">

@@ -56,8 +56,6 @@ void CustomWidget::initializeAL(int argc, char**argv)
 }
 
 
-
-
 void CustomWidget::timeOut()
 {
     rtri += 0.5f;

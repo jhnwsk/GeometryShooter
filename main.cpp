@@ -9,7 +9,7 @@ int main(int argc, char **argv)
     int appSpeed = 5;
     QApplication a( argc, argv );
 
-    CustomWidget *w = new GeometryShooter(argc, argv, appSpeed);
+    GeometryShooter *w = new GeometryShooter(argc, argv, appSpeed);
 
     // a.setMainWidget( w );
     w->show();
