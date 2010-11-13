@@ -68,4 +68,3 @@ void CustomWidget::timeOutSlot()
 {
     timeOut();
 }
-

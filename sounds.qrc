@@ -1,5 +1,1 @@
-<RCC>
-    <qresource prefix="/music/background">
-        <file alias="strings">30192__ERH__string_1_loop.wav</file>
-    </qresource>
-</RCC>
+<RCC/>

@@ -1,10 +1,13 @@
 #ifndef MOVING_TARGET_H
 #define MOVING_TARGET_H
 
+#include <QObject>
 #include <QGLWidget>
+#include <QTimer>
 
-class MovingTarget
+class MovingTarget : public QObject
 {
+    Q_OBJECT
 private:
     MovingTarget();
 
@@ -18,6 +21,7 @@ protected:
     GLfloat position[3];
     // initialize sound routine
     void initSound();
+    virtual void timeOut();
 
 public:
     // which sound will you be playin'
@@ -26,16 +30,22 @@ public:
     virtual void paintGL() = 0;
     static void staticPaintGL(MovingTarget * obj);
 
+protected slots:
+    virtual void timeOutSlot();
+
+private:
+    QTimer *m_timer;
+
 };
 
 class Triangle : public MovingTarget
 {
+    Q_OBJECT
 private:
     Triangle();
 public:
     Triangle(short bufferNumber);
     void paintGL();
-
 };
 
 #endif // MOVING_TARGET_H

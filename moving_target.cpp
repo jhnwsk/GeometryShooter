@@ -1,8 +1,10 @@
 #include "moving_target.h"
 
-MovingTarget::MovingTarget(short bufferNumber)
+MovingTarget::MovingTarget(short bufferNumber) : QObject(0)
 {
-
+    m_timer = new QTimer( this );
+    connect( m_timer, SIGNAL(timeout()), this, SLOT(timeOutSlot()) );
+    m_timer->start( bufferNumber );
 }
 
 void MovingTarget::staticPaintGL(MovingTarget * obj)
@@ -51,4 +53,14 @@ void Triangle::paintGL()
     glColor3f(0.0f,1.0f,0.0f);
     glVertex3f(-1.0f,-1.0f, 1.0f);
     glEnd();
+}
+
+void MovingTarget::timeOut()
+{
+    rotationSpeed += 0.5f;
+}
+
+void MovingTarget::timeOutSlot()
+{
+   timeOut();
 }
