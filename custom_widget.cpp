@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QTimer>
 #include <QKeyEvent>
+#include <math.h>
 
 ALfloat CustomWidget::ListenerPos[] = { 0.0, 0.0, 0.0 };
 ALfloat CustomWidget::ListenerVel[] = { 0.0, 0.0, 0.0 };
@@ -43,7 +44,15 @@ void CustomWidget::resizeGL( int width, int height )
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,0.1f,100.0f);
+    // gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,0.1f,100.0f);
+    GLfloat fieldOfView = 45.0f;
+    GLfloat zNear = 0.1f;
+    GLfloat zFar = 255.0f;
+    GLfloat aspect = float(width)/float(height);
+    GLfloat fH = tan( float(fieldOfView / 360.0f * 3.14159f) ) * zNear;
+    GLfloat fW = fH * aspect;
+    glFrustum( -fW, fW, -fH, fH, zNear, zFar );
+    // glOrtho(-10.0f, 10.0f, -10.0f, 10.0f, 0.1f, 255.0f);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();

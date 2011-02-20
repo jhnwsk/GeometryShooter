@@ -16,6 +16,7 @@
 #define BACKGROUND      0
 #define TRIANGLE        1
 #define SQUARE          2
+#define SPHERE          3
 
 #define VELOCITY_OFFSET    3
 #define POSITION_OFFSET    3
@@ -54,9 +55,10 @@ private:
         void keyPressEvent(QKeyEvent *e);
 
         // openAL initializers
-        ALboolean LoadALData();
-        void SetListenerValues();
-        void KillALData();
+        ALboolean loadALData();
+        void setListenerValues();
+        void killALData();
+        void generateTarget();
 };
 
 

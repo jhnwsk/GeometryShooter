@@ -9,6 +9,7 @@ GLint GeometryShooter::play[NUM_SOURCES] = {true, false, false};
 GLfloat GeometryShooter::SourcesPos [NUM_SOURCES][3] = {{.0f,.0f,.0f},{3.0f,-1.0f,-7.0f},{-12.0f,7.0f,-45.0f}};
 GLfloat GeometryShooter::SourcesVel [NUM_SOURCES][3] = {{.0f,.0f,.0f},{.0f,.0f,.0f},{.0f,.0f,.0f}};
 
+
 void GeometryShooter::keyPressEvent(QKeyEvent *e)
 {
     switch( e->key() )
@@ -19,9 +20,33 @@ void GeometryShooter::keyPressEvent(QKeyEvent *e)
     case Qt::Key_1: movingTargets.push_back(new Triangle(TRIANGLE)); break;// play[TRIANGLE] = !play[TRIANGLE]; break;
     case Qt::Key_2: play[SQUARE] = !play[SQUARE]; break;
     case Qt::Key_M: play[BACKGROUND] = !play[BACKGROUND]; break;
+
+    case Qt::Key_R:
+        generateTarget();
+        break;
+
     case Qt::Key_Escape:
-        KillALData();
+        killALData();
         close();
+    }
+}
+
+void GeometryShooter::generateTarget()
+{
+    srand(time(NULL));
+    int objectType = rand() % 3 + 1;  //number between 1 and 1
+
+    switch(objectType)
+    {
+    case SQUARE:
+        movingTargets.push_back(new Square(SQUARE));
+        break;
+    case TRIANGLE:
+        movingTargets.push_back(new Triangle(TRIANGLE));
+        break;
+    case SPHERE:
+        movingTargets.push_back(new Sphere(SQUARE));
+        break;
     }
 }
 
@@ -34,9 +59,9 @@ GeometryShooter::GeometryShooter(int argc, char **argv, int timerInterval) : Cus
     rtri = rquad = 0.0f;
 
     // Load the wav data.
-    LoadALData();
+    loadALData();
 
-    SetListenerValues();
+    setListenerValues();
 }
 
 // not using this one
@@ -48,49 +73,8 @@ void GeometryShooter::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    for_each(movingTargets.begin(), movingTargets.end(), MovingTarget::staticPaintGL);
+    for_each(movingTargets.begin(), movingTargets.end(), MovingTarget::StaticPaintGL);
     // foreach(MovingTarget * target, movingTargets) target->paintGL();
-
-    if(play[SQUARE])
-    {
-        glLoadIdentity();
-        glTranslatef(SourcesPos[SQUARE][0], SourcesPos[SQUARE][1], SourcesPos[SQUARE][2]);
-        glRotatef(rquad,1.0f,0.0f,0.0f);
-
-        glColor3f(0.5f,0.5f,1.0f);
-        glBegin(GL_QUADS);
-        glColor3f(0.0f,1.0f,0.0f);
-        glVertex3f( 1.0f, 1.0f,-1.0f);
-        glVertex3f(-1.0f, 1.0f,-1.0f);
-        glVertex3f(-1.0f, 1.0f, 1.0f);
-        glVertex3f( 1.0f, 1.0f, 1.0f);
-        glColor3f(1.0f,0.5f,0.0f);
-        glVertex3f( 1.0f,-1.0f, 1.0f);
-        glVertex3f(-1.0f,-1.0f, 1.0f);
-        glVertex3f(-1.0f,-1.0f,-1.0f);
-        glVertex3f( 1.0f,-1.0f,-1.0f);
-        glColor3f(1.0f,0.0f,0.0f);
-        glVertex3f( 1.0f, 1.0f, 1.0f);
-        glVertex3f(-1.0f, 1.0f, 1.0f);
-        glVertex3f(-1.0f,-1.0f, 1.0f);
-        glVertex3f( 1.0f,-1.0f, 1.0f);
-        glColor3f(1.0f,1.0f,0.0f);
-        glVertex3f( 1.0f,-1.0f,-1.0f);
-        glVertex3f(-1.0f,-1.0f,-1.0f);
-        glVertex3f(-1.0f, 1.0f,-1.0f);
-        glVertex3f( 1.0f, 1.0f,-1.0f);
-        glColor3f(0.0f,0.0f,1.0f);
-        glVertex3f(-1.0f, 1.0f, 1.0f);
-        glVertex3f(-1.0f, 1.0f,-1.0f);
-        glVertex3f(-1.0f,-1.0f,-1.0f);
-        glVertex3f(-1.0f,-1.0f, 1.0f);
-        glColor3f(1.0f,0.0f,1.0f);
-        glVertex3f( 1.0f, 1.0f,-1.0f);
-        glVertex3f( 1.0f, 1.0f, 1.0f);
-        glVertex3f( 1.0f,-1.0f, 1.0f);
-        glVertex3f( 1.0f,-1.0f,-1.0f);
-        glEnd();
-    }
 
     playAL();
 }
@@ -111,6 +95,9 @@ void GeometryShooter::playAL()
             alSourceStop(Sources[BACKGROUND]);
     }
 
+    for_each(movingTargets.begin(), movingTargets.end(), MovingTarget::StaticPLayAL);
+
+    /*
     alGetSourcei(Sources[TRIANGLE], AL_SOURCE_STATE, &isPlaying);
     if(play[TRIANGLE])
     {
@@ -135,10 +122,11 @@ void GeometryShooter::playAL()
         if(isPlaying == AL_PLAYING)
             alSourceStop(Sources[SQUARE]);
     }
+    */
 }
 
 
-ALboolean GeometryShooter::LoadALData(){
+ALboolean GeometryShooter::loadALData(){
     // Variables to load into.
     ALboolean loop = true;
     // Variables to load into.
@@ -212,14 +200,14 @@ ALboolean GeometryShooter::LoadALData(){
 
     return AL_FALSE;
 }
-void GeometryShooter::SetListenerValues()
+void GeometryShooter::setListenerValues()
 {
     alListenerfv(AL_POSITION,    ListenerPos);
     alListenerfv(AL_VELOCITY,    ListenerVel);
     alListenerfv(AL_ORIENTATION, ListenerOri);
 }
 
-void GeometryShooter::KillALData()
+void GeometryShooter::killALData()
 {
     alDeleteBuffers(1, &Buffers[TRIANGLE]);
     alDeleteSources(1, &Sources[TRIANGLE]);

@@ -5,7 +5,7 @@
 
 int main(int argc, char **argv)
 {
-
+    // time interval value for all timeout slots
     int appSpeed = 5;
     QApplication a( argc, argv );
 
